@@ -1,0 +1,5 @@
+# Keep the guidance repository stable across platforms.
+*.md text eol=lf
+*.json text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf

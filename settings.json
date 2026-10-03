@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "attribution": {},
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "TodoRead",
+      "TodoWrite",
+      "WebSearch",
+      "WebFetch(domain:docs.*)",
+      "WebFetch(domain:*.anthropic.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:stackoverflow.com)",
+      "WebFetch(domain:developer.mozilla.org)",
+      "Bash(git status)",
+      "Bash(git log *)",
+      "Bash(git diff *)",
+      "Bash(git branch *)",
+      "Bash(git show *)",
+      "Bash(git stash list)",
+      "Bash(git remote -v)",
+      "Bash(node --version)",
+      "Bash(npm --version)",
+      "Bash(python --version)",
+      "Bash(pip --version)",
+      "Bash(npx tsc --noEmit *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(find *)",
+      "Bash(ls *)",
+      "Bash(dir *)",
+      "Bash(type *)",
+      "Bash(where *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(./**/*.pem)",
+      "Read(./**/*.key)",
+      "Bash(rm -rf /)",
+      "Bash(rm -rf ~)",
+      "Bash(rm -rf *)",
+      "Bash(*--force*)",
+      "Bash(curl * | bash*)",
+      "Bash(curl * | sh*)",
+      "Bash(*> /dev/null 2>&1 &*)"
+    ]
+  },
+  "extraKnownMarketplaces": {
+    "mattpocock": {
+      "source": {
+        "source": "github",
+        "repo": "mattpocock/skills"
+      }
+    }
+  },
+  "autoUpdatesChannel": "latest",
+  "feedbackSurveyState": {
+    "lastShownTime": 1754058585930
+  },
+  "shell": "powershell",
+  "theme": "light",
+  "enabledPlugins": {
+    "mattpocock-skills@mattpocock": true
+  }
+}

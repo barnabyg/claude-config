@@ -1,0 +1,8 @@
+# Keep this repository limited to global guidance and settings.
+*
+!.gitignore
+!.gitattributes
+!/CLAUDE.md
+!/settings.json
+!/agent-guidance/
+!/agent-guidance/*.md
