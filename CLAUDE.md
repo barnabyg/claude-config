@@ -32,6 +32,7 @@
 
 - This is a Windows 11 system.
 - Use PowerShell syntax for system commands when bash alternatives aren't available.
+- Commands you give me to run myself must be PowerShell 7 (`pwsh`), in `powershell`-tagged code blocks: `foreach ($x in ...) { }`, `$env:VAR`, and `.cmd` shims; `&&`/`||` chaining is fine. Bash syntax is only for your own Bash tool calls; never hand me a bash loop, heredoc, `export`, or `$(...)`-style bash expansion.
 - Use forward slashes in paths where possible for cross-platform compatibility.
 - Be aware of CRLF vs LF line endings — prefer LF for code files.
 - In PowerShell, use Node.js `.cmd` shims: `npm.cmd`, `npx.cmd`, `pnpm.cmd`, `yarn.cmd`, and repo-local launchers such as `.\node_modules\.bin\playwright.cmd`. Prefer repository scripts via `npm.cmd run <script>`. If a `.ps1` shim is blocked, switch to `.cmd`; don't change the execution policy.
