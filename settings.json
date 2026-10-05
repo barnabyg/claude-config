@@ -83,5 +83,8 @@
   "theme": "light",
   "enabledPlugins": {
     "mattpocock-skills@mattpocock": true
-  }
+  },
+  "sandbox": {
+    "excludedCommands": ["gh"]
+  },
 }
