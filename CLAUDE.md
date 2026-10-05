@@ -39,7 +39,7 @@
 
 ## GitHub Authentication
 
-- A `gh auth status` failure inside a sandbox is inconclusive — host keyring credentials may be unavailable there. Don't start `gh auth login` on that evidence alone; run the `gh` command outside the sandbox instead.
+- `gh` runs outside the sandbox via `sandbox.excludedCommands` in settings.json. If it still fails with an auth error, don't run `gh auth login` — report the failure.
 - Keep credentials in the host keyring. Persisted `GH_TOKEN`/`GITHUB_TOKEN` and `gh auth login --insecure-storage` are not acceptable workarounds.
 
 ## Git Usage
