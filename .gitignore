@@ -6,3 +6,5 @@
 !/settings.json
 !/agent-guidance/
 !/agent-guidance/*.md
+!/scripts/
+!/scripts/*.sh
