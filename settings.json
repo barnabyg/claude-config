@@ -86,6 +86,9 @@
     "mattpocock-skills@mattpocock": true
   },
   "sandbox": {
-    "excludedCommands": ["gh"]
-  }
+    "excludedCommands": [
+      "gh"
+    ]
+  },
+  "switchModelsOnFlag": false
 }
