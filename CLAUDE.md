@@ -69,12 +69,10 @@
 
 For behavior changes, report:
 
-- significant user-visible and technical changes;
-- concrete manual tests, their expected results, and any prerequisites, commands, URLs, flags, or test data;
-- automated checks and results; and
-- important untested, uncertain, or out-of-scope behavior.
+- A clear and concise summary of significant user-visible and technical changes. Minimise jargon;
+- Concrete manual tests, their expected results, and any prerequisites, commands, URLs, flags, or test data;
 
 ## Manual Testing
 
-Every ticket requiring manual verification must provide a single documented command that prepares and launches the application in a testable state. The agent should supply the expected behaviour and a short, specific test scenario. Manual verification must not require knowledge of the application's internal tooling.
+Every ticket requiring manual verification must provide a single documented command that prepares and launches the application in a testable state. Ensure the user knows which folder they should be in when they run the command. The agent should supply the expected behaviour and a short, specific test scenario. Manual verification must not require knowledge of the application's internal tooling.
 Focus manual testing on changed behavior and regression risks rather than repeating automated commands. If meaningful manual testing doesn't apply, say so.
