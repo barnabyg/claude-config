@@ -73,6 +73,18 @@
             "statusMessage": "Tidying merged git branches"
           }
         ]
+      },
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "bash \"$HOME/.claude/scripts/hygiene-trigger.sh\" 2>/dev/null || true",
+            "timeout": 60,
+            "statusMessage": "Checking whether a hygiene review is due"
+          }
+        ]
       }
     ]
   },
