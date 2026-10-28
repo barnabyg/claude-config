@@ -78,7 +78,7 @@ Found by hygiene review <#number, or "manual run">.
 
 ## Configuration
 
-`.claude/hygiene.json` in the project root. Its presence opts the project into automatic reviews; `{}` takes every default.
+`.claude/hygiene.json` in the project root, written by `/hygiene-setup`. Its presence opts the project into automatic reviews; `{}` takes every default.
 
 | Key | Default | Used by |
 | --- | --- | --- |

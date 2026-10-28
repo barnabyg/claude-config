@@ -9,5 +9,5 @@
 !/scripts/
 !/scripts/*.sh
 !/skills/
-!/skills/hygiene/
-!/skills/hygiene/*.md
+!/skills/*/
+!/skills/*/*.md
