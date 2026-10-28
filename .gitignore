@@ -8,3 +8,6 @@
 !/agent-guidance/*.md
 !/scripts/
 !/scripts/*.sh
+!/skills/
+!/skills/hygiene/
+!/skills/hygiene/*.md
