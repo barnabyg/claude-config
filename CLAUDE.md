@@ -28,6 +28,10 @@
 - Treat released backup, export, and persisted-data formats as compatibility contracts. Preserve readable old formats. Before making old data unreadable, get explicit approval, identify affected versions, and propose a migration.
 - Test critical workflows spanning UI, API, and storage at the user-facing boundary; unit or API tests alone are insufficient.
 
+## Long-Running Commands
+
+Background jobs only notify on exit, so a hang is silent. Give every `run_in_background` command a hard limit (~3x expected): `CI=1 timeout 900 npm test </dev/null >log 2>&1`. No watch mode. Treat hitting the limit as a hang and find the cause before rerunning. Dev servers: use `preview_start`.
+
 ## Windows Environment
 
 - This is a Windows 11 system.
