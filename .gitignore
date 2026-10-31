@@ -10,3 +10,5 @@
 !/skills/
 !/skills/*/
 !/skills/*/*.md
+# Installed and updated by the hf tooling, not maintained here.
+/skills/hf-cli/
