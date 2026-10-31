@@ -1,9 +1,8 @@
-# Keep this repository limited to global guidance and settings.
+# Keep this repository limited to global guidance. settings.json stays per-machine.
 *
 !.gitignore
 !.gitattributes
 !/CLAUDE.md
-!/settings.json
 !/agent-guidance/
 !/agent-guidance/*.md
 !/scripts/
