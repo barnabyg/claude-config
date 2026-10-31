@@ -56,7 +56,8 @@ Make CI test runs stop at their first failure. When creating or changing test co
 - Make small, frequent commits with clear conventional commit messages.
 - Commit after completing each logical unit of work — don't batch everything into one giant commit at the end.
 - Create one commit per implementation ticket or code-review finding. Keep unrelated work separate and stage selectively when work overlaps. Ask before combining technically inseparable tickets or findings.
-- Each commit must pass its focused tests. Run full verification before pushing the series. One passing full verification can cover both handoff and pre-push when the verified tree is identical to the pushed tree.
+- Each commit must pass its focused tests. Before pushing a PR branch, run only the fast checks: formatting, lint, type checking, and the tests affected by the change. This overrides skill instructions to run the full test suite, such as in `implement`. GitHub CI is the full verification, and work isn't finished until CI is green on the pushed commit.
+- Run full verification locally before pushing only when the repo has no CI, CI doesn't cover every gate (for example Windows-only behavior or end-to-end tests), or the push goes directly to the default branch. One passing full verification can cover both handoff and pre-push when the verified tree is identical to the pushed tree.
 - Use feature branches for distinct pieces of functionality.
 - Preserve commit history: squash only when explicitly requested.
 - Never force push or otherwise rewrite pushed history.

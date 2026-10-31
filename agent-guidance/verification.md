@@ -14,7 +14,7 @@ Every project containing executable code must provide one canonical, non-mutatin
 
 When creating a project or introducing a language, choose maintained ecosystem-native tools, pin their versions, commit their configuration, integrate every gate into the canonical command and CI, and document any inapplicable gate.
 
-Configure warnings as errors wherever supported. Run focused checks during implementation and the full canonical command before handoff. Continue remediation until it exits successfully with no errors, unresolved diagnostics, actionable or unsuppressed warnings, formatting violations, test failures, or undocumented suppressions. A passing exit code with unresolved warning output is a failure.
+Configure warnings as errors wherever supported. Run focused checks during implementation. Before handoff, the full canonical command must pass on the exact commit being handed off: in a green CI run that covers every gate, or locally when the global pre-push rule requires a local run. Continue remediation until it passes with no errors, unresolved diagnostics, actionable or unsuppressed warnings, formatting violations, test failures, or undocumented suppressions. A passing exit code with unresolved warning output is a failure.
 
 Treat every warning as work. Either fix its underlying cause or add a narrow documented exception that:
 
@@ -26,4 +26,4 @@ Treat every warning as work. Either fix its underlying cause or add a narrow doc
 
 Broad exclusions, blanket suppressions, warning-count baselines, and grandfathered violations are not compliant. When adopting the gates in a legacy project, resolve existing violations rather than baselining them.
 
-Report the canonical command, its result, and every exception added or changed.
+Report the canonical command or CI run, its result, and every exception added or changed.
