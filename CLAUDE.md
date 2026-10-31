@@ -19,8 +19,8 @@
 
 ## Conditional Guidance (read when the trigger applies)
 
-- **Verification:** Before creating or changing executable code, read `C:/Users/bob/.claude/agent-guidance/verification.md`. It defines the canonical verification command, required gates, zero-warning standard, and exceptions.
-- **Investigation:** Before substantive optimisation, debugging, or performance-regression changes, read `C:/Users/bob/.claude/agent-guidance/investigation.md` for baselines, attempt logging, and stopping rules.
+- **Verification:** Before creating or changing executable code, read `~/.claude/agent-guidance/verification.md`. It defines the canonical verification command, required gates, zero-warning standard, and exceptions.
+- **Investigation:** Before substantive optimisation, debugging, or performance-regression changes, read `~/.claude/agent-guidance/investigation.md` for baselines, attempt logging, and stopping rules.
 - **Images on GitHub:** To show a screenshot or other image in a PR, issue or comment, use the `pr-screenshots` skill. `gh` can't attach images, but that skill can embed them.
 
 ## Compatibility and Critical Workflows
