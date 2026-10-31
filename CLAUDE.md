@@ -19,8 +19,9 @@
 
 ## Conditional Guidance (read when the trigger applies)
 
-- **Verification:** Before creating or changing executable code, read `~/.claude/agent-guidance/verification.md`. It defines the canonical verification command, required gates, zero-warning standard, and exceptions.
-- **Investigation:** Before substantive optimisation, debugging, or performance-regression changes, read `~/.claude/agent-guidance/investigation.md` for baselines, attempt logging, and stopping rules.
+- **Verification:** Before creating or changing executable code, read `C:/Users/bob/.claude/agent-guidance/verification.md`. It defines the canonical verification command, required gates, zero-warning standard, and exceptions.
+- **Live dashboard:** When creating a software project with automated verification, or materially changing an existing build or test workflow, also read `C:/Users/bob/.claude/agent-guidance/verification-dashboard.md`.
+- **Investigation:** Before substantive optimisation, debugging, or performance-regression changes, read `C:/Users/bob/.claude/agent-guidance/investigation.md` for baselines, attempt logging, and stopping rules.
 - **Images on GitHub:** To show a screenshot or other image in a PR, issue or comment, use the `pr-screenshots` skill. `gh` can't attach images, but that skill can embed them.
 
 ## Compatibility and Critical Workflows
@@ -47,7 +48,7 @@ Make CI test runs stop at their first failure. When creating or changing test co
 
 ## GitHub Authentication
 
-- `gh` runs outside the sandbox via `sandbox.excludedCommands` in settings.json. If it still fails with an auth error, don't run `gh auth login` — report the failure.
+- `gh` should run outside the sandbox (via `sandbox.excludedCommands` in settings.json where configured). A `gh auth status` failure inside a sandbox is inconclusive — host keyring credentials may be unavailable there — so never start `gh auth login` on that evidence. If `gh` still fails with an auth error when run outside the sandbox, don't run `gh auth login` — report the failure.
 - Keep credentials in the host keyring. Persisted `GH_TOKEN`/`GITHUB_TOKEN` and `gh auth login --insecure-storage` are not acceptable workarounds.
 
 ## Git Usage
@@ -78,10 +79,14 @@ Make CI test runs stop at their first failure. When creating or changing test co
 
 For behavior changes, report:
 
-- A clear and concise summary of significant user-visible and technical changes. Minimise jargon;
-- Concrete manual tests, their expected results, and any prerequisites, commands, URLs, flags, or test data;
+- a clear and concise summary of significant user-visible and technical changes, minimising jargon;
+- concrete manual tests, their expected results, and any prerequisites, commands, URLs, flags, or test data (see Manual Testing);
+- automated checks and results; and
+- important untested, uncertain, or out-of-scope behavior.
 
 ## Manual Testing
 
-Every ticket requiring manual verification must provide a single documented command that prepares and launches the application in a testable state. Ensure the user knows which folder they should be in when they run the command. The agent should supply the expected behaviour and a short, specific test scenario. Manual verification must not require knowledge of the application's internal tooling.
-Focus manual testing on changed behavior and regression risks rather than repeating automated commands. If meaningful manual testing doesn't apply, say so.
+- Every ticket requiring manual verification must provide a single documented command that prepares and launches the application in a testable state, and state which folder to run it from.
+- Supply the expected behavior and a short, specific test scenario.
+- Manual verification must not require knowledge of the application's internal tooling.
+- Focus manual testing on changed behavior and regression risks rather than repeating automated commands. If meaningful manual testing doesn't apply, say so.
