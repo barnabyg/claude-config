@@ -32,6 +32,10 @@
 
 Background jobs only notify on exit, so a hang is silent. Give every `run_in_background` command a hard limit (~3x expected): `CI=1 timeout 900 npm test </dev/null >log 2>&1`. No watch mode. Treat hitting the limit as a hang and find the cause before rerunning. Dev servers: use `preview_start`.
 
+## GitHub CI
+
+Make CI test runs stop at their first failure. When creating or changing test config, set `maxFailures: 1` for CI, scoped so local runs still report every failure: `maxFailures: process.env.CI ? 1 : 0` in Playwright. Other runners use their equivalent, such as `bail: 1` in Vitest and Jest.
+
 ## Windows Environment
 
 - This is a Windows 11 system.
