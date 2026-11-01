@@ -67,6 +67,7 @@ Cleanup is part of completing PR work. When you merge a PR, or learn during an a
 - Commands given to the user to run manually must use PowerShell 7 (`pwsh`) in `powershell`-tagged code blocks. Use PowerShell constructs such as `foreach ($x in ...) { }` and `$env:VAR`; do not give the user Bash loops, heredocs, `export`, or Bash command substitution. Bash syntax is fine for agent-executed Bash commands.
 - Prefer forward slashes in paths where cross-platform tools support them. Prefer LF line endings for code files; be alert to CRLF/LF differences.
 - In native Windows PowerShell, use Node.js `.cmd` shims: `npm.cmd`, `npx.cmd`, `pnpm.cmd`, `yarn.cmd`, and repository-local launchers such as `.\node_modules\.bin\playwright.cmd`. Prefer repository scripts through `npm.cmd run <script>`. If a `.ps1` shim is blocked, switch to `.cmd`; preserve the execution policy.
+- Git Bash keeps only about the first 8,186 bytes of a `bash -c` string (measured on 5.3.15). Bash tool commands over that fail with `unexpected EOF while looking for matching`, and the reported line is just the last apostrophe before the cut, so changing the quoting will not help. Keep inline commands under about 7 KB, and run anything longer from a script file. Outside the tool's `eval` wrapper, a plain long `bash -c` can stop at the cut and still exit 0, so never pass long scripts that way.
 
 ## GitHub authentication
 
