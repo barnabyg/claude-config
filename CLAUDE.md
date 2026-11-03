@@ -41,7 +41,8 @@ State which branch was pushed. Describe work as shipped or available from a norm
 
 ## Long-running commands
 
-- Background jobs only notify on exit, so a hang can be silent. Give every `run_in_background` command a hard wall-clock limit (roughly three times the expected duration). For a Unix-like shell, an example is `CI=1 timeout 900 npm test </dev/null >log 2>&1`. On native Windows PowerShell, use an appropriate Windows-compatible timeout/process-control mechanism rather than assuming Unix `timeout` exists.
+- Run test suites, builds, and other CPU-heavy commands expected to take more than about 30 seconds at below-normal CPU priority, so the PC stays responsive. In Bash, prefix `nice -n 10`: Git Bash maps it to the Windows BelowNormal class, and child processes such as test workers inherit it. In PowerShell, start the same command with `(Get-Process -Id $PID).PriorityClass = 'BelowNormal';`. Use below-normal, not idle (`nice -n 19`): idle can starve tests on a busy machine and cause spurious timeouts.
+- Background jobs only notify on exit, so a hang can be silent. Give every `run_in_background` command a hard wall-clock limit (roughly three times the expected duration). For a Unix-like shell, an example is `CI=1 timeout 900 nice -n 10 npm test </dev/null >log 2>&1`. On native Windows PowerShell, use an appropriate Windows-compatible timeout/process-control mechanism rather than assuming Unix `timeout` exists.
 - Capture logs; avoid watch/interactive modes. Treat hitting the timeout as a possible hang and investigate before rerunning. Ensure timed-out commands do not leave task-owned child processes running. For development servers, use `preview_start` where available.
 
 ## Parallel agents and Git worktrees
