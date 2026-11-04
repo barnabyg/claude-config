@@ -34,8 +34,10 @@ When a task includes commits:
 
 State which branch was pushed. Describe work as shipped or available from a normal clone only when the remote default branch contains it. When normal-clone availability matters, confirm the default branch and verify a clean checkout. Verify installation, startup, packaging, and deployment changes from a clean checkout when practical; ignored, untracked, or generated local files are not evidence.
 
-## CI test behaviour
+## Test runner configuration
 
+- Run test suites in parallel as far as possible, locally and in CI. When creating or changing test configuration, turn on the runner's parallel mode, for example Playwright `fullyParallel: true`, Vitest or Jest worker pools, pytest-xdist `-n auto`, or `t.Parallel()` in Go. Shard slow suites across CI jobs.
+- Keep tests parallel-safe by giving each worker its own ports, databases, and temporary paths. Serialise only the specific tests or files that share a resource you cannot isolate, and say why in a comment.
 - Configure CI test runners to stop on the first failure, avoiding wasted CI time after a run has already failed. Keep local test runs able to report all failures.
 - When creating or changing test configuration, use a CI-scoped setting: for Playwright, `maxFailures: process.env.CI ? 1 : 0`; for Vitest or Jest, use their equivalent CI-only `bail` setting. Do not indiscriminately impose fail-fast on local runs.
 
