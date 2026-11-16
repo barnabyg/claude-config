@@ -36,7 +36,7 @@ State which branch was pushed. Describe work as shipped or available from a norm
 
 ## Test runner configuration
 
-- Run test suites in parallel as far as possible, locally and in CI. When creating or changing test configuration, turn on the runner's parallel mode, for example Playwright `fullyParallel: true`, Vitest or Jest worker pools, pytest-xdist `-n auto`, or `t.Parallel()` in Go. Shard slow suites across CI jobs.
+- The goal is minimum wall-clock test time, which the slowest worker or CI job sets. Run test suites in parallel, locally and in CI: when creating or changing test configuration, turn on the runner's parallel mode, for example Playwright `fullyParallel: true`, Vitest or Jest worker pools, pytest-xdist `-n auto`, or `t.Parallel()` in Go. Split long test files or tests so work spreads evenly across workers, and balance CI shards by duration, not file count.
 - Keep tests parallel-safe by giving each worker its own ports, databases, and temporary paths. Serialise only the specific tests or files that share a resource you cannot isolate, and say why in a comment.
 - Configure CI test runners to stop on the first failure, avoiding wasted CI time after a run has already failed. Keep local test runs able to report all failures.
 - When creating or changing test configuration, use a CI-scoped setting: for Playwright, `maxFailures: process.env.CI ? 1 : 0`; for Vitest or Jest, use their equivalent CI-only `bail` setting. Do not indiscriminately impose fail-fast on local runs.
