@@ -7,6 +7,7 @@
 !/agent-guidance/*.md
 !/scripts/
 !/scripts/*.sh
+!/scripts/*.ps1
 !/skills/
 !/skills/*/
 !/skills/*/*.md

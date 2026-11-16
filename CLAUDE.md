@@ -43,8 +43,9 @@ State which branch was pushed. Describe work as shipped or available from a norm
 
 ## Long-running commands
 
+- Run full test suites, full builds, and other commands that load the whole machine through the machine-wide lock: `pwsh -NoProfile -File ~/.claude/scripts/run-exclusive.ps1 [-TimeoutSec N] <command> [args...]`. Parallel agents, worktrees, and repositories then queue for it instead of competing for CPU and memory, which slows every run and causes spurious timeouts. The wrapper also runs the command at below-normal priority and applies `-TimeoutSec` only after acquiring the lock, so queue time is not counted; use it instead of an outer `timeout` or `nice`, since an outer `timeout` counts queue time and can orphan the command. Set environment variables such as `CI=1` before the call. Focused tests and quick checks do not need the lock. The wrapper exits 124 on timeout, and `CLAUDE_EXCLUSIVE_DISABLE=1` bypasses the lock.
 - Run test suites, builds, and other CPU-heavy commands expected to take more than about 30 seconds at below-normal CPU priority, so the PC stays responsive. In Bash, prefix `nice -n 10`: Git Bash maps it to the Windows BelowNormal class, and child processes such as test workers inherit it. In PowerShell, start the same command with `(Get-Process -Id $PID).PriorityClass = 'BelowNormal';`. Use below-normal, not idle (`nice -n 19`): idle can starve tests on a busy machine and cause spurious timeouts.
-- Background jobs only notify on exit, so a hang can be silent. Give every `run_in_background` command a hard wall-clock limit (roughly three times the expected duration). For a Unix-like shell, an example is `CI=1 timeout 900 nice -n 10 npm test </dev/null >log 2>&1`. On native Windows PowerShell, use an appropriate Windows-compatible timeout/process-control mechanism rather than assuming Unix `timeout` exists.
+- Background jobs only notify on exit, so a hang can be silent. Give every `run_in_background` command a hard wall-clock limit (roughly three times the expected duration). For a full suite, an example is `CI=1 pwsh -NoProfile -File ~/.claude/scripts/run-exclusive.ps1 -TimeoutSec 900 npm test </dev/null >log 2>&1`; for other commands in a Unix-like shell, `timeout 900 nice -n 10 <command>`. On native Windows PowerShell, use an appropriate Windows-compatible timeout/process-control mechanism rather than assuming Unix `timeout` exists.
 - Capture logs; avoid watch/interactive modes. Treat hitting the timeout as a possible hang and investigate before rerunning. Ensure timed-out commands do not leave task-owned child processes running. For development servers, use `preview_start` where available.
 
 ## Parallel agents and Git worktrees
@@ -53,6 +54,7 @@ State which branch was pushed. Describe work as shipped or available from a norm
 - Worktrees isolate files, not host resources. Namespace collision-prone ports, databases, temporary paths, build outputs, and container/Compose resources per worktree; serialize commands when safe isolation is unavailable.
 - Integrate completed branches in one designated worktree. Apply the verification policy above; integration does **not** independently require a redundant full local suite when CI provides the required coverage. Never modify or remove another agent's active worktree.
 - If worktrees are unavailable, keep parallel agents read-only and serialize stateful work.
+- When working through several tickets, in sequence or with subagents, run only focused tests per ticket. Run the full suite once for the batch, through the lock above, or leave it to CI; never once per ticket or per subagent. Per-ticket commits make a late failure easy to attribute.
 
 ## Post-merge cleanup
 
